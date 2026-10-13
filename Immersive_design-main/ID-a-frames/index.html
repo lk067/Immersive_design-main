@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strand Scène</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="script.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+
+  <!-- Scene -->
+  <a-scene background="color: #87CEEB" cursor="rayOrigin: mouse" raycaster="objects: .klikbaar">
+    
+    <!-- Audio -->
+    <a-assets timeout="3000">
+      <audio id="zeeGeluid" src="zeeGeluid.mp3" preload="auto"></audio>
+    </a-assets>
+
+    <!-- Camera -->
+    <a-entity position="0 1.5 3">
+      <a-camera look-controls="pointerLockEnabled: false"></a-camera>
+    </a-entity>
+
+    <!-- Verlichting -->
+    <a-entity light="type: ambient; color: #FFFFFF; intensity: 0.6"></a-entity>
+    <a-entity 
+      light="type: directional; color: #FFF; intensity: 0.8; castShadow: true" 
+      position="4 7 3">
+    </a-entity>
+
+    <!-- Strand -->
+    <a-plane 
+      position="0 0 0" 
+      rotation="-90 0 0" 
+      width="20" 
+      height="20" 
+      color="#E4C690" 
+      shadow="receive: true">
+    </a-plane>
+
+    <!-- Zee -->
+    <a-plane 
+      position="0 0.01 -10" 
+      rotation="-90 0 0" 
+      width="20" 
+      height="10" 
+      color="#1E90FF" 
+      material="opacity: 0.85; transparent: true">
+    </a-plane>
+
+    <!-- Strandstoel -->
+    <a-entity 
+      id="strandstoel"
+      gltf-model="beach_chair.glb"
+      position="1.5 0 -0.5" 
+      rotation="0 -30 0"
+      scale="1 1 1"
+      shadow="cast: true; receive: true">
+    </a-entity>
+
+    <!-- Jotaro Kujo -->
+    <a-entity 
+      id="jotaro"
+      gltf-model="jotaro_kujo_-_idle_-_unity.glb"
+      position="-1.5 0.5 -1"
+      rotation="0 25 0"
+      scale="1 1 1"
+      animation__zweven="property: position; to: -1.5 1.0 -1; dir: alternate; dur: 1800; easing: easeInOutSine; loop: true"
+      shadow="cast: true; receive: true">
+    </a-entity>
+
+    <!-- Klikbare schelp -->
+    <a-entity 
+      id="schelp" 
+      class="klikbaar" 
+      schelp-klik="soundId: #zeeGeluid"
+      position="0 0.25 0" 
+      shadow="cast: true; receive: true">
+
+      <!-- Hitbox -->
+      <a-box 
+        class="klikbaar"
+        material="opacity: 0.0; transparent: true" 
+        depth="0.8" height="0.6" width="0.8">
+      </a-box>
+
+      <!-- Bovenste schelphelft -->
+      <a-cone 
+        radius-bottom="0.4" 
+        radius-top="0.05" 
+        height="0.6" 
+        color="#FFF5EE" 
+        rotation="20 0 0" 
+        segments-radial="6" 
+        shadow="cast: true">
+      </a-cone>
+
+      <!-- Onderste schelphelft -->
+      <a-cone 
+        position="0 0.1 -0.05" 
+        radius-bottom="0.38" 
+        radius-top="0.05" 
+        height="0.5" 
+        color="#FFE4E1" 
+        rotation="-20 0 0" 
+        segments-radial="6" 
+        shadow="cast: true">
+      </a-cone>
+
+    </a-entity>
+
+  </a-scene>
+
+</body>
+</html>
